@@ -2,7 +2,7 @@
 require "t1.php";
 
 //inicializando variaveis
-$argumento = 3;
+$argumento = 1.0471975512;
 $precisao = 0.00001;
 $maxIteracoes = 50;
 $numIteracoes = 1;
@@ -61,13 +61,38 @@ $codErro = 0;
                     <tr>
                         <th>K (&iacute;ndice)</th>
                         <th>Termo</th>
-                        <th>Exponencial</th>
+                        <th>Logaritmica</th>
                         <th>Erro</th>
                     </tr>
                     <?php loge($argumento, $precisao, $maxIteracoes, $numIteracoes, $codErro); ?>
                 </table>
             </div>
         </div>
+
+<?php
+//inicializando variaveis
+$argumento = 57.59586;
+$precisao = 0.01;
+$maxIteracoes = 50;
+$numIteracoes = 1;
+$codErro = 0;
+?>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table">
+                <h2>Calculando sen <?php echo $argumento ?></h2>
+                    <tr>
+                        <th>K (&iacute;ndice)</th>
+                        <th>Termo</th>
+                        <th>Seno</th>
+                        <th>Erro</th>
+                    </tr>
+                    <?php seno($argumento, $precisao, $maxIteracoes, $numIteracoes, $codErro); ?>
+                </table>
+            </div>
+        </div>
+
 
     </body>
 </html>
