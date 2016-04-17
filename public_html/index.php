@@ -31,6 +31,7 @@ $codErro = 0;
         <br>
         <div class="row">
             <div class="col-sm-8">
+                <h2>Calculando e^<?php echo $argumento ?></h2>
                 <table class="table">
                     <tr>
                         <th>K (&iacute;ndice)</th>
@@ -40,6 +41,30 @@ $codErro = 0;
                     </tr>
                     <?php imprimeExpoIteracoes(0, 1, 1, "---", $precisao); ?>
                     <?php expo($argumento, $precisao, $maxIteracoes, $numIteracoes, $codErro); ?>
+                </table>
+            </div>
+        </div>
+
+<?php
+//inicializando variaveis
+$argumento = 5;
+$precisao = 0.01;
+$maxIteracoes = 50;
+$numIteracoes = 1;
+$codErro = 0;
+?>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table">
+                <h2>Calculando ln <?php echo $argumento ?></h2>
+                    <tr>
+                        <th>K (&iacute;ndice)</th>
+                        <th>Termo</th>
+                        <th>Exponencial</th>
+                        <th>Erro</th>
+                    </tr>
+                    <?php loge($argumento, $precisao, $maxIteracoes, $numIteracoes, $codErro); ?>
                 </table>
             </div>
         </div>
