@@ -9,7 +9,7 @@
  * @param $numIteraÃ§Ãµes - retorno com o numero de iteraÃ§Ãµes realizadas
  * @param $codErro - retorno representando sucesso ou nao
  *
- * @return $valor da funcao no ponto 
+ * @return $codErro da funcao no ponto 
  */
 function expo($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
 {
@@ -48,7 +48,7 @@ function expo($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
         }
     }
 
-    return $valor;
+    return $codErro;
 }
 
 /**
@@ -98,7 +98,7 @@ function arrumaPrecisao($precisao) {
  * @param $numIteraÃ§Ãµes - retorno com o numero de iteraÃ§Ãµes realizadas
  * @param $codErro - retorno representando sucesso ou nao
  *
- * @return $valor da funcao no ponto
+ * @return $codErro da funcao no ponto
  */
 function loge($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
 {
@@ -138,7 +138,7 @@ function loge($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
         }
     }
 
-    return $valor;
+    return $codErro;
 }
 
 /**
@@ -150,10 +150,15 @@ function loge($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
  * @param $numIteraÃ§Ãµes - retorno com o numero de iteraÃ§Ãµes realizadas
  * @param $codErro - retorno representando sucesso ou nao
  *
- * @return $valor da funcao no ponto
+ * @return $codErro da funcao no ponto
  */
 function seno($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
 {
+
+    //removendo as voltas completas do argumento para que os valores
+    //estejam dentro do intervalo [0 - 2PI]
+    $argumento = getValorSemVoltasCompletas($argumento);
+
     //inicializando variaveis para o loop
     $condicaoParada = false;
     $valor = 0;
@@ -164,15 +169,67 @@ function seno($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
     while (!$condicaoParada) {
         //calculando os novos valores para essa iteracao
         if ($numIteracoes > 1) {
-           $termo = $termo * (-((pow($argumento,$numIteracoes))/(($numIteracoes-1)*($numIteracoes))));
+            $termo = $termo * ( (-pow($argumento,2) ) / (($numIteracoes-1)*($numIteracoes)) );
         }
         $valor = $valor + $termo;
         $erro = ($numIteracoes > 1) ? ($termo / $valor) : 1;
 
         //formatando os valores de acordo com a precisao desejada
-        $erro =  number_format($erro, $casasDecimais);
-        $termo =  number_format($termo, $casasDecimais);
-        $valor =  number_format($valor, $casasDecimais);
+
+        imprimeExpoIteracoes($numIteracoes, $valor, $termo, $erro, $casasDecimais);
+
+        $numIteracoes++;
+        $numIteracoes++;
+
+        //se o erro for menor que a precisao entao convergiu e obtive sucesso
+        if (abs($erro) < $precisao) {
+            $codErro = 0;
+            $condicaoParada =  true;
+        }
+
+        if ($numIteracoes > $maxIteracoes) {
+            $codErro = 1;
+            $condicaoParada =  true;
+        }
+    }
+
+    return $codErro;
+}
+
+/**
+ * Metodo para calcular o valor de uma funcao cosseno
+ *
+ * @param $argumento - valor de x
+ * @param $precisao - valor da precisao desejada (ex: 0.0001 = 10^-4)
+ * @param $maxIteracoes - numero maximo de iteraÃ§Ãµes
+ * @param $numIteraÃ§Ãµes - retorno com o numero de iteraÃ§Ãµes realizadas
+ * @param $codErro - retorno representando sucesso ou nao
+ *
+ * @return $codErro da funcao no ponto
+ */
+function cosseno($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
+{
+
+    //removendo as voltas completas do argumento para que os valores
+    //estejam dentro do intervalo [0 - 2PI]
+    $argumento = getValorSemVoltasCompletas($argumento);
+
+    //inicializando variaveis para o loop
+    $condicaoParada = true;
+    $valor = 1;
+    $termo = 1;
+    $erro = 1;
+    $casasDecimais = arrumaPrecisao($precisao);
+
+    while (!$condicaoParada) {
+        //calculando os novos valores para essa iteracao
+        if ($numIteracoes > 1) {
+           //TODO: qual razao para ser multiplicada? $termo = 
+        }
+        $valor = $valor + $termo;
+        $erro = abs(($numIteracoes > 1) ? ($termo / $valor) : 1);
+
+        //formatando os valores de acordo com a precisao desejada
 
         imprimeExpoIteracoes($numIteracoes, $valor, $termo, $erro, $casasDecimais);
 
@@ -191,8 +248,30 @@ function seno($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
         }
     }
 
-    return $valor;
+    return $codErro;
 }
 
+
+
+/**
+ * Metodo para ser usado em funcoes trigonometricas,
+ * que coloca o valor recebido dentro de um valor equivalente dentro do circulo trigonometrico
+ * (2,5PI  -->  0,5PI)
+ *
+ * return - $valorTransformado - valor dentro de um intervalo [0 - 2PI]
+ */
+function getValorSemVoltasCompletas($numRadianos)
+{
+    //valor recebido
+    $fullValue = abs($numRadianos);
+
+    if ($fullValue > (2*M_PI)) {
+        $fullValue = getValorSemVoltasCompletas($fullValue-(2*M_PI));
+    } else {
+        return $fullValue;
+    }
+
+    return $fullValue;
+}
 
 ?>

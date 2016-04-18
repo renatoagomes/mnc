@@ -2,8 +2,8 @@
 require "t1.php";
 
 //inicializando variaveis
-$argumento = 1.0471975512;
-$precisao = 0.00001;
+$argumento = 3;
+$precisao = 0.001;
 $maxIteracoes = 50;
 $numIteracoes = 1;
 $codErro = 0;
@@ -81,7 +81,8 @@ $codErro = 0;
         <div class="row">
             <div class="col-sm-8">
                 <table class="table">
-                <h2>Calculando sen <?php echo $argumento ?></h2>
+                   <h2>Calculando sen <?php echo $argumento ?> = sen <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao));
+?></h2>
                     <tr>
                         <th>K (&iacute;ndice)</th>
                         <th>Termo</th>
@@ -92,6 +93,32 @@ $codErro = 0;
                 </table>
             </div>
         </div>
+
+<?php
+//inicializando variaveis
+$argumento = ((47*M_PI)/2);
+$precisao = 0.01;
+$maxIteracoes = 50;
+$numIteracoes = 2;
+$codErro = 0;
+?>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table">
+                   <h2>Calculando cos <?php echo $argumento ?> = cos <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao));
+?></h2>
+                    <tr>
+                        <th>K (&iacute;ndice)</th>
+                        <th>Termo</th>
+                        <th>Cosseno</th>
+                        <th>Erro</th>
+                    </tr>
+                    <?php cosseno($argumento, $precisao, $maxIteracoes, $numIteracoes, $codErro); ?>
+                </table>
+            </div>
+        </div>
+
 
 
     </body>
