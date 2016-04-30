@@ -1,5 +1,7 @@
 <?php
 
+require "funcoes_auxiliares.php";
+
 /**
  * Metodo para calcular o valor de uma funcao exponencial
  *
@@ -346,65 +348,49 @@ function cosec($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
 
 
 /**
- * Metodo para ser usado em funcoes trigonometricas,
- * que coloca o valor recebido dentro de um valor equivalente dentro do circulo trigonometrico
- * (2,5PI  -->  0,5PI)
+ * Metodo para calcular o valor de uma funcao cotangente
  *
- * return - $valorTransformado - valor dentro de um intervalo [0 - 2PI]
+ * @param $argumento - valor de x
+ * @param $precisao - valor da precisao desejada (ex: 0.0001 = 10^-4)
+ * @param $maxIteracoes - numero maximo de Iteracoes
+ * @param $numIteracoes - retorno com o numero de Iteracoes realizadas
+ * @param $codErro - retorno representando sucesso ou nao
+ *
+ * @return $codErro da funcao no ponto
  */
-function getValorSemVoltasCompletas($numRadianos)
+function cotag($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
 {
-    //valor recebido
-    $fullValue = abs($numRadianos);
+    //removendo as voltas completas do argumento para que os valores
+    //estejam dentro do intervalo [0 - 2PI]
+    $argumento = getValorSemVoltasCompletas($argumento);
 
-    if ($fullValue > (2*M_PI)) {
-        $fullValue = getValorSemVoltasCompletas($fullValue-(2*M_PI));
+    //arrumando parametro precisao
+    $casasDecimais = arrumaPrecisao($precisao);
+
+    //inicializando os indices de Seno e Cosseno, para que as iteracoes deles
+    //nao comecem com indices errados
+    $numIteracoesSeno = 1;
+    $numIteracoesCosseno = 2;
+
+    //variaveis para pegar o codErro das funcoes seno e cosseno
+    $codErroSeno = 0;
+    $codErroCosseno = 0;
+
+    //Calculando cotan x = cos x / sen x;
+    $senoNoPto = seno($argumento, $precisao, $maxIteracoes, $numIteracoesSeno, $codErroSeno);
+    $cossenoNoPto = cosseno($argumento, $precisao, $maxIteracoes, $numIteracoesCosseno, $codErroCosseno);
+    $valor = $cossenoNoPto / $senoNoPto;
+
+    // no caso de cotangente, tenho que checar os códigos de erro das funcoes seno e cosseno
+    // ja que nao uso da formula de series de tangente e sim das series de seno e cosseno
+    if (!$codErroSeno || !$codErroCosseno) {
+        //como 0 é o codigo de sucesso, se ambos os códigos de erro forem 0 entao funcionou
+        $codErro = 0;
     } else {
-        return $fullValue;
+        $codErro = $codErroSeno ? $codErroSeno : $codErroCosseno;
     }
 
-    return $fullValue;
+    return $valor;
 }
-
-/**
- * Metodo para imprimir uma iteracao do metodo expo em forma de tr
- *
- * @param $indiceIteracao - numero da iteracao
- * @param $valorExponencial - valor da funcao Exponencial para essa iteracao
- * @param $valorTermo - valor do termo para essa iteracao
- * @param $valorErro - valor do erro para essa iteracao
- * @param $precisao - numero de casas decimais depois da virgula
- */
-function imprimeIteracoes($indiceIteracao, $valorExponencial, $valorTermo, $valorErro, $precisao)
-{
-    echo "<tr>" .
-            "<td>$indiceIteracao</td>" .
-            "<td>".number_format($valorTermo, $precisao)."</td>" .
-            "<td>".number_format($valorExponencial, $precisao)."</td>" .
-            "<td>".((is_numeric($valorErro)) ? number_format($valorErro, $precisao+1) : $valorErro). "</td>" .
-        "</tr>";
-}
-
-
-
-/**
- * Metodo para arrumar a precisao (0.001) --> (3)
- *
- * @param $precisao - numero para a precisao (0.0001)
- *
- * @return numero de casas decimais
- */
-function arrumaPrecisao($precisao)
-{
-    //se existir uma string depois do '.' entao pegue o numero de caracteres
-    if (array_key_exists("1", explode('.', $precisao))) {
-        $precisao =  strlen(explode('.', $precisao)[1]);
-    } else {
-        $precisao = 3;
-    }
-
-    return ($precisao+1);
-}
-
 
 ?>

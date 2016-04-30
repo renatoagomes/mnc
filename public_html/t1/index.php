@@ -15,7 +15,7 @@ $codErro = 0;
     <body>
         <h1>Metodos numericos computacionais</h1>
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-2 float-left">
                 <ul class="list list-group">
                     <li class="list-group-item">
                         <a href="../"> Voltar </a>
@@ -48,11 +48,14 @@ $codErro = 0;
                        <button data-toggle="collapse" data-target="#cosecante">Funcao Cosecante</button>
                         </button>
                     </li>
-
+                    <li class="list-group-item">
+                       <button data-toggle="collapse" data-target="#cotangente">Funcao Cotangente</button>
+                        </button>
+                    </li>
                 </ul>
             </div>
 
-            <div id="expo" class="col-sm-8 collapse">
+            <div id="expo" class="col-sm-9 float-right collapse">
                 <h2>Calculando e^<?php echo $argumento ?></h2>
                 <table class="table">
                     <tr>
@@ -65,7 +68,6 @@ $codErro = 0;
                     <?php imprimeIteracoes($numIteracoes, $valorExpo, "---", "---", arrumaPrecisao($precisao)); ?>
                 </table>
             </div>
-        </div>
 
 <?php
 //inicializando variaveis
@@ -76,8 +78,7 @@ $numIteracoes = 1;
 $codErro = 0;
 ?>
 
-            <div class="row">
-                <div id="loge" class="collapse col-sm-8">
+                <div id="loge" class="collapse float-right col-sm-8">
                     <table class="table">
                     <h2>Calculando ln <?php echo $argumento ?></h2>
                         <tr>
@@ -90,7 +91,6 @@ $codErro = 0;
                         <?php imprimeIteracoes($numIteracoes, $valorLoge, "---", "---", arrumaPrecisao($precisao)); ?>
                     </table>
                 </div>
-            </div>
 
 <?php
 //inicializando variaveis
@@ -101,8 +101,7 @@ $numIteracoes = 1;
 $codErro = 0;
 ?>
 
-            <div class="row">
-                <div id="seno" class="collapse col-sm-8">
+                <div id="seno" class="collapse float-right col-sm-8">
                     <table class="table">
                        <h2>Calculando sen <?php echo $argumento ?> = sen <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao));
             ?></h2>
@@ -116,7 +115,6 @@ $codErro = 0;
                         <?php imprimeIteracoes($numIteracoes, $valorSeno, "---", "---", arrumaPrecisao($precisao)); ?>
                     </table>
                 </div>
-            </div>
 
 <?php
 //inicializando variaveis
@@ -127,8 +125,7 @@ $numIteracoes = 2;
 $codErro = 0;
 ?>
 
-            <div class="row">
-                <div id="cosseno" class="collapse col-sm-8">
+                <div id="cosseno" class="collapse float-right col-sm-8">
                     <table class="table">
                        <h2>Calculando cos <?php echo $argumento ?> = cos <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao));
             ?></h2>
@@ -142,7 +139,6 @@ $codErro = 0;
                         <?php imprimeIteracoes($numIteracoes, $valorCosseno, "---", "---", arrumaPrecisao($precisao)); ?>
                     </table>
                 </div>
-        </div>
 <?php
 //inicializando variaveis
 $argumento = 1.0471975511966;
@@ -152,8 +148,7 @@ $numIteracoes = 0;
 $codErro = 0;
 ?>
 
-            <div class="row">
-                <div id="tangente" class="collapse col-sm-8">
+                <div id="tangente" class="collapse float-right col-sm-8">
                     <table class="table">
                        <h2>Calculando tan <?php echo $argumento ?> = tan <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao)); ?></h2>
                        <tr>
@@ -166,7 +161,6 @@ $codErro = 0;
                         <?php imprimeIteracoes($numIteracoes, $valorTangente, "---", "---", arrumaPrecisao($precisao)); ?>
                     </table>
                 </div>
-            </div>
 
 <?php
 //inicializando variaveis
@@ -177,8 +171,7 @@ $numIteracoes = 0;
 $codErro = 0;
 ?>
 
-            <div class="row">
-                <div id="secante" class="collapse col-sm-8">
+                <div id="secante" class="collapse float-right col-sm-8">
                     <table class="table">
                        <h2>Calculando sec <?php echo $argumento ?> = sec <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao)); ?></h2>
                        <tr>
@@ -191,7 +184,6 @@ $codErro = 0;
                         <?php imprimeIteracoes($numIteracoes, $valorSecante, "---", "---", arrumaPrecisao($precisao)); ?>
                     </table>
                 </div>
-            </div>
 
 
 <?php
@@ -203,8 +195,7 @@ $numIteracoes = 0;
 $codErro = 0;
 ?>
 
-            <div class="row">
-                <div id="cosecante" class="collapse col-sm-8">
+                <div id="cosecante" class="collapse float-right col-sm-8">
                     <table class="table">
                        <h2>Calculando cosec <?php echo $argumento ?> = cosec <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao)); ?></h2>
                        <tr>
@@ -217,13 +208,30 @@ $codErro = 0;
                         <?php imprimeIteracoes($numIteracoes, $valorCosecante, "---", "---", arrumaPrecisao($precisao)); ?>
                     </table>
                 </div>
+
+<?php
+//inicializando variaveis
+$argumento = M_PI/6;
+$precisao = 0.0001;
+$maxIteracoes = 50;
+$numIteracoes = 0;
+$codErro = 0;
+?>
+
+                <div id="cotangente" class="collapse float-right col-sm-8">
+                    <table class="table">
+                       <h2>Calculando cotag <?php echo $argumento ?> = cotag <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao)); ?></h2>
+                       <tr>
+                            <th>K (&iacute;ndice)</th>
+                            <th>Termo</th>
+                            <th>Cotag</th>
+                            <th>Erro</th>
+                        </tr>
+                        <?php $valorCotag =  cotag($argumento, $precisao, $maxIteracoes, $numIteracoes, $codErro); ?>
+                        <?php imprimeIteracoes($numIteracoes, $valorCotag, "---", "---", arrumaPrecisao($precisao)); ?>
+                    </table>
+                </div>
             </div>
-
-
-
-
-
-
 
     </body>
 </html>
