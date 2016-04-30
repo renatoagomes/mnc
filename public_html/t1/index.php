@@ -52,6 +52,11 @@ $codErro = 0;
                        <button data-toggle="collapse" data-target="#cotangente">Funcao Cotangente</button>
                         </button>
                     </li>
+                    <li class="list-group-item">
+                       <button data-toggle="collapse" data-target="#arcseno">Funcao Arcseno</button>
+                        </button>
+                    </li>
+
                 </ul>
             </div>
 
@@ -231,8 +236,35 @@ $codErro = 0;
                         <?php imprimeIteracoes($numIteracoes, $valorCotag, "---", "---", arrumaPrecisao($precisao)); ?>
                     </table>
                 </div>
-            </div>
 
+<?php
+//inicializando variaveis
+$argumento = (0.75);
+$precisao = 0.0000001;
+$maxIteracoes = 50;
+$numIteracoes = 1;
+$codErro = 0;
+?>
+
+                <div id="arcseno" class="collapse float-right col-sm-8">
+                    <table class="table">
+                       <h2>Calculando arcsen <?php echo $argumento ?> = arcsen <?php echo number_format(getValorSemVoltasCompletas($argumento), arrumaPrecisao($precisao)); ?></h2>
+                       <tr>
+                            <th>K (&iacute;ndice)</th>
+                            <th>Termo</th>
+                            <th>ArcSeno</th>
+                            <th>Erro</th>
+                        </tr>
+                        <?php $valorArcSen = arcsen($argumento, $precisao, $maxIteracoes, $numIteracoes, $codErro); ?>
+                        <?php imprimeIteracoes($numIteracoes, $valorArcSen, "---", "---", arrumaPrecisao($precisao)); ?>
+                    </table>
+                </div>
+
+
+
+
+
+            </div>
     </body>
 </html>
 

@@ -393,4 +393,61 @@ function cotag($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
     return $valor;
 }
 
+/**
+ * Metodo para calcular o valor de uma funcao arcsen
+ *
+ * @param $argumento - valor de x
+ * @param $precisao - valor da precisao desejada (ex: 0.0001 = 10^-4)
+ * @param $maxIteracoes - numero maximo de Iteracoes
+ * @param $numIteracoes - retorno com o numero de Iteracoes realizadas
+ * @param $codErro - retorno representando sucesso ou nao
+ *
+ * @return $valor  - $valor da funcao no ponto
+ */
+function arcsen($argumento, $precisao, $maxIteracoes, &$numIteracoes, &$codErro)
+{
+    //inicializando variaveis para o loop
+    $condicaoParada = false;
+    $valor = 0;
+    $termo = $argumento;
+    $erro = 1;
+    $casasDecimais = arrumaPrecisao($precisao);
+
+    while (!$condicaoParada) {
+        //calculando os novos valores para essa iteracao
+        if ($numIteracoes > 1 ) {
+            $termo = $termo * (  ( ($argumento*$argumento)/$numIteracoes) * (($numIteracoes-2) / ($numIteracoes-1)) );
+        }
+
+        $valor = $valor + $termo;
+        $erro = ($numIteracoes > 1) ? ($termo / $valor) : 1;
+
+        //formatando os valores de acordo com a precisao desejada
+        $erro =  number_format($erro, $casasDecimais);
+        $termo =  number_format($termo, $casasDecimais);
+        $valor =  number_format($valor, $casasDecimais);
+
+        imprimeIteracoes($numIteracoes, $valor, $termo, $erro, $casasDecimais);
+
+        $numIteracoes++;
+        $numIteracoes++;
+
+        //se o erro for menor que a precisao entao convergiu e obtive sucesso
+        if ($erro < $precisao) {
+            $codErro = 0;
+            $condicaoParada =  true;
+        }
+
+        if ($numIteracoes > $maxIteracoes) {
+            $codErro = 1;
+            $condicaoParada =  true;
+        }
+    }
+
+    return $valor;
+}
+
+
+
+
 ?>
