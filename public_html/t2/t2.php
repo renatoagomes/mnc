@@ -2,7 +2,7 @@
 require "../funcoes_auxiliares.php";
 
 $funcao = function ($x) {
-    return 3 * $x - 2;
+    return $x*$x -4*$x +2;
 };
 
 /**
@@ -27,9 +27,9 @@ Class T2
     {
         //arrumando casas decimais
         $casasDecimais = arrumaPrecisao($precisao);
-
-
+        //checando tamanho do intervalo
         $tamanhoIntervalo = $limSup - $limInf;
+
         while ($tamanhoIntervalo > $precisao)
         {
             //obtendo ponto medio do intervalo
@@ -67,6 +67,24 @@ Class T2
             if ($valorFuncaoSup * $valorFuncaoPtoMedio < 0) {
                 $limInf = $ptoMedio;
             }
+
+            //recalculando o tamanho do intervalo
+            $tamanhoIntervalo = $limSup - $limInf;
+
+            if ($tamanhoIntervalo < $precisao) {
+                echo "tam < precisao";
+                break;
+            }
+
+            imprimeIteracoes([
+                $numIteracoes,
+                $limInf,
+                $ptoMedio,
+                $limSup,
+                $valorFuncaoInf,
+                $valorFuncaoPtoMedio,
+                $valorFuncaoSup,
+            ]);
 
             $numIteracoes++;
         }

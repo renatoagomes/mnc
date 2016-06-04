@@ -1,6 +1,6 @@
 <?php
 
-require "funcoes_auxiliares.php";
+require "../funcoes_auxiliares.php";
 
 /**
  * Metodo para calcular o valor de uma funcao exponencial

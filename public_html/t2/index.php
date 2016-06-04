@@ -1,8 +1,8 @@
 <?php
 require "t2.php";
 
-$limInf = 0;
-$limSup = 3;
+$limInf = -5;
+$limSup = 5;
 
 ?>
 
