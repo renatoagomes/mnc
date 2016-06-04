@@ -51,9 +51,6 @@ function imprimeIteracoes($indiceIteracao, $valorExponencial, $valorTermo, $valo
 function imprimeIteracoesArray($arrayValores)
 {
 
-
-    $output .= 
-
     echo "<tr>" .
             "<td>$indiceIteracao</td>" .
             "<td>".number_format($valorTermo, $precisao)."</td>" .
