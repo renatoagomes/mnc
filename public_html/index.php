@@ -12,6 +12,9 @@
                     <li class="list-group-item">
                         <a href="t2"> Trabalho 2 </a>
                     </li>
+                    <li class="list-group-item">
+                        <a href="t4"> Trabalho 4 </a>
+                    </li>
                 </ul>
             </div
         </div>
