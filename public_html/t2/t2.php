@@ -1,6 +1,9 @@
 <?php
 require "../funcoes_auxiliares.php";
 
+/**
+ * Essa é a funcao passada por parametro x^2 -4x + 2
+ */
 $funcao = function ($x) {
     return $x*$x -4*$x +2;
 };
@@ -27,9 +30,9 @@ Class T2
     {
         //arrumando casas decimais
         $casasDecimais = arrumaPrecisao($precisao);
+
         //checando tamanho do intervalo
         $tamanhoIntervalo = $limSup - $limInf;
-
         while ($tamanhoIntervalo > $precisao)
         {
             //obtendo ponto medio do intervalo
@@ -41,7 +44,7 @@ Class T2
             $valorFuncaoPtoMedio = $funcao($ptoMedio);
 
             //Testando pelo teorema de bolzano se existe raiz f(a)*f(b) < 0
-            $existeRaiz =  (($valorFuncaoInf * $valorFuncaoSup < 0) ? true : false );
+            $existeRaiz =  ((($valorFuncaoInf * $valorFuncaoSup) < 0) ? true : false );
 
             if ($valorFuncaoInf == 0) {
                 echo 'intervalo inferior é raiz da funcao';
@@ -60,11 +63,13 @@ Class T2
 
             //se f(a) * f(x) < 0 (raiz estano intervalo da esquerda)
             if ($valorFuncaoInf * $valorFuncaoPtoMedio < 0) {
+                //echo '1 if';
                 $limSup = $ptoMedio;
             }
 
             //se f(b) * f(x) < 0 (raiz estano intervalo da direita)
             if ($valorFuncaoSup * $valorFuncaoPtoMedio < 0) {
+                //echo '2 if';
                 $limInf = $ptoMedio;
             }
 
@@ -72,23 +77,33 @@ Class T2
             $tamanhoIntervalo = $limSup - $limInf;
 
             if ($tamanhoIntervalo < $precisao) {
-                echo "tam < precisao";
+                $codErro = 0;
+                echo "Raiz da funcao: $ptoMedio \n<br>";
+                echo "Numero de iteracoes: $numIteracoes";
                 break;
             }
-
-            imprimeIteracoes([
-                $numIteracoes,
-                $limInf,
-                $ptoMedio,
-                $limSup,
-                $valorFuncaoInf,
-                $valorFuncaoPtoMedio,
-                $valorFuncaoSup,
-            ]);
 
             $numIteracoes++;
         }
    }
+
+
+    /**
+     * Metodo para calcular a derivada primeira no ponto x
+     */
+    public function dfdx(Closure $funcao, $x, &$codErro)
+    {
+        $erro = 0.000001;
+        $h = sqrt($erro)*$x;
+        $derivada = ($funcao($x+$h) - $funcao($x)) / $h;
+
+        echo "erro = $erro <br>";
+        echo "h = $h <br>";
+        echo "derivada = $derivada <br>";
+
+        return $derivada;
+    }
+
 
 
 
