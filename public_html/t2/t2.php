@@ -1,12 +1,6 @@
 <?php
 require "../funcoes_auxiliares.php";
 
-/**
- * Essa é a funcao passada por parametro x^2 -4x + 2
- */
-$funcao = function ($x) {
-    return $x*$x -4*$x +2;
-};
 
 /**
  * Classe para representar o T2 (Calculo de zeros de Funcao);
@@ -97,11 +91,36 @@ Class T2
         $h = sqrt($erro)*$x;
         $derivada = ($funcao($x+$h) - $funcao($x)) / $h;
 
-        echo "erro = $erro <br>";
-        echo "h = $h <br>";
-        echo "derivada = $derivada <br>";
+        //echo "h = $h <br>";
+        //echo "erro = $erro <br>";
+        //echo "derivada = $derivada <br>";
 
         return $derivada;
+    }
+
+
+    /**
+     * Metodo para encontrar uma raiz utilizando o meoto de newton
+     */
+    public function newton(Closure $funcao, $xzero, $epson, $maxIteracoes, &$numIteracoes, $codErro)
+    {
+
+        $erroDerivada = null;
+        $valorFuncao = $funcao($xzero);
+        $valorDerivada = $this->dfdx($funcao, $xzero, $erroDerivada);
+        $xk  = $xzero - ( $valorFuncao / $valorDerivada);
+
+        for ($i = 1; $i <= $maxIteracoes; $i++) {
+            echo "xk: $xk <br>";
+
+            if (abs($funcao($xk)) < $epson ) {
+                echo "$xk é raiz";
+                break;
+            }
+
+            $xk  = $xk - ( $funcao($xk) / $this->dfdx($funcao, $xk, $codErro));
+
+        }
     }
 
 

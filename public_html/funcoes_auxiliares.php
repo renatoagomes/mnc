@@ -1,4 +1,13 @@
 <?php 
+
+/**
+ * Essa é a funcao passada por parametro x^2 -4x + 2
+ */
+$funcao = function ($x) {
+    return $x*$x -4*$x +2;
+};
+
+
 /**
  * Metodo para ser usado em funcoes trigonometricas,
  * que coloca o valor recebido dentro de um valor equivalente dentro do circulo trigonometrico

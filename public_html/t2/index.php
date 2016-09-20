@@ -23,6 +23,9 @@ $precisao = 0.0001;
                     <li class="list-group-item">
                        <button data-toggle="collapse" data-target="#derivada">Derivada 1º</button>
                     </li>
+                    <li class="list-group-item">
+                       <button data-toggle="collapse" data-target="#newton">Newton</button>
+                    </li>
                 </ul>
             </div>
 
@@ -40,7 +43,13 @@ $precisao = 0.0001;
                 echo $t2obj->dfdx($funcao, 2, $codErro);
                 ?>
             </div>
-
+            <div id="newton" class="col-sm-9 float-right collapse">
+                <h2>Calculando Zero de funcao pelo metodo de Newton  </h2>
+                <?php
+                $t2obj= new T2();
+                echo $t2obj->newton($funcao, 2, 0.0001, 25, $numIteracoes, $codErro);
+                ?>
+            </div>
         </div>
     </body>
 </html>
