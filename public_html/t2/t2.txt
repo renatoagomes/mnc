@@ -1,0 +1,21 @@
+#Trabalho 2 - MNC
+
+Alunos:
+Antonio Renato Apolinario Gomes
+Diego Alexandre Tomaz dos Santos
+Thiago Ramos
+
+
+T2 - CÁLCULO DE ZERO DE FUNÇÃO
+
+O T2 foi desenvolvido utilizando linguagem PHP, utilizamos valores fixos para o calculo de cada funcao, segue um relatorio de alguns dos valores obtidos:
+
+Função bissecao - Calculando uma raiz para x^2 -4x + 2
+precisao = 0.0001; limInf = -2; $limSup = 2; Total Iteracoes: 15; Valor obtido: 0.58575439453125
+
+Função dfdx - Calculando a derivada primeira de x^2 -4x + 2 no pto x=2
+Valor obtido: 0.0019999999998355
+
+Funcao newton - Calculando zero de funcao pelo metodo de newton para x^2 -4x + 2
+Total Iteracoes 14: Valor obtido:3.4142136116947
+

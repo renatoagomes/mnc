@@ -1,0 +1,23 @@
+#Trabalho 1 - MNC
+
+Alunos:
+Antonio Renato Apolinario Gomes
+Diego Alexandre Tomaz dos Santos
+Thiago Ramos
+
+
+T1 - CÁLCULO DE VALORES DE FUNÇÕES
+
+O T1 foi desenvolvido utilizando linguagem PHP, utilizamos valores fixos para o calculo de cada funcao, segue um relatorio de alguns dos valores obtidos:
+
+Função expo - Calculando e^3
+Total Iteracoes: 13		Valor obtido: 20.08521
+
+Função loge - Calculando ln5
+Total Iteracoes: 19		Valor obtido: 1.60934
+
+Função seno - Calculando sen(1.047)
+Total Iteracoes: 9		Valor obtido: 0.866
+
+Função cosseno - Calculando cos(1.047)
+Total Iteracoes: 10		Valor obtido: 0.500

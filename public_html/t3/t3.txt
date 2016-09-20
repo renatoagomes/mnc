@@ -1,0 +1,20 @@
+#Trabalho 3 - MNC
+
+Alunos:
+Antonio Renato Apolinario Gomes
+Diego Alexandre Tomaz dos Santos
+Thiago Ramos
+
+T3 - DIFERENCIAÇÃO NUMÉRICA
+
+O T3 foi desenvolvido utilizando linguagem PHP, utilizamos valores fixos para o calculo de cada funcao, segue um relatorio de alguns dos valores obtidos:
+
+Função dfdx - Calculando a derivada primeira de x^2 -4x + 2 no pto x=2
+Valor obtido: 0.0019999999998355
+
+Função dfdx2 - Calculando a derivada segunda de x^2 -4x + 2 no pto x=2
+Valor obtido 2.0010000001119
+
+Função dfdx3 - Calculando a derivada terceira de x^2 -4x + 2 no pto x=2
+Valor obtido: -1.5967893673974E-8
+
