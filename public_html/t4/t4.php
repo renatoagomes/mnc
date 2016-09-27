@@ -24,18 +24,12 @@ function gaussCompacto($ordemMatriz, $matriz, $arrayTermosInd, &$arraySolucao, &
             }
 
         } else {
-
-            for ($ui = $i; $ui <= $ordemMatriz; $ui++) {
-                $soma = 0;
-                for ($somai = 0; $somai < count; $somai++) {
-                    $soma;
-                }
-
-
-            }
-
-
-
+            //função U, caminha do meio até o fim
+            for ($ui = $i; $ui <= $ordemMatriz; $ui++) 
+                $matrizAux[$ui][$i]= $matrizAux[$ui][$i]- fsomatoria($matrizAux,$i);
+            //função L, caminha para baixo na matriz    
+            for ($t = $i; $t < $ordemMatriz; $t++)
+                $matrizAux[i][t]=($matrizAux[i][t]-fsomatoria($matrizAux,$i))/$matrizAux[i][i];
         }
 
     }
@@ -44,6 +38,14 @@ function gaussCompacto($ordemMatriz, $matriz, $arrayTermosInd, &$arraySolucao, &
     echo "dentro de gauss";
 
 }
+//função somatoria caminha do incio da linha e da coluna até o elemento antes da diagonal principal
+function fsomatoria($matrizAux,$i){
+    for($j=0,$j<$i,$j++)
+        $aux = $aux + $matrizAux[j][i] * $matrizAux[i][j];
+    return ($aux);
+}
+
+
 
 
 ?>
